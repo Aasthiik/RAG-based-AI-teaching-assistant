@@ -178,17 +178,23 @@ curl -X POST http://127.0.0.1:8000/ask -F "question=Where is CSS introduced?"
 
 ## Deployment on Render
 
-1. Create a new Web Service on Render and connect this repository.
+This repository includes [`render.yaml`](render.yaml) for a guided deployment.
+In Render, choose **New → Blueprint**, connect this repository, and confirm the
+blueprint. Then add the values for `GROQ_API_KEY` and `JINA_API_KEY` when prompted.
+
+For a manual Web Service setup:
+
+1. Connect this repository to a new Render Web Service.
 2. Set the root directory to `RAG-assistance`.
 3. Use the Python version from `runtime.txt`.
 4. Add `GROQ_API_KEY` and `JINA_API_KEY` as environment variables.
-5. Build command:
+5. Use this build command:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-6. Start command:
+6. Use this start command:
 
 ```bash
 uvicorn app:app --host 0.0.0.0 --port $PORT
