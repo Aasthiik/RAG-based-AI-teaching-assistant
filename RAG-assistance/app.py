@@ -1,0 +1,59 @@
+import os
+
+from fastapi import FastAPI, Form
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
+
+import rag_engine
+
+app = FastAPI(title="RAG Teaching Assistant")
+
+# Static frontend
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Mount videos only if the folder exists
+if os.path.isdir("videos"):
+    app.mount("/videos", StaticFiles(directory="videos"), name="videos")
+
+
+@app.get("/")
+def home():
+    return FileResponse("static/index.html")
+
+
+@app.post("/ask")
+async def ask(question: str = Form(...)):
+    print("=" * 60)
+    print("POST /ask received")
+    print(question)
+
+    try:
+        print("Calling rag_engine.ask()")
+        answer, sources = rag_engine.ask(question)
+        print("rag_engine.ask() finished")
+
+        return JSONResponse({
+            "answer": answer,
+            "sources": sources
+        })
+
+    except Exception as e:
+        import traceback
+
+        print("EXCEPTION:")
+        traceback.print_exc()
+
+        return JSONResponse(
+            {"error": str(e)},
+            status_code=500
+        )
+
+if __name__ == "__main__":
+    import uvicorn
+
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(
+        "app:app",
+        host="0.0.0.0",
+        port=port,
+    )
