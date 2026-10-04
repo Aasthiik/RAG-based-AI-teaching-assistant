@@ -122,8 +122,8 @@ RAG-Project/
 ### Clone
 
 ```bash
-git clone https://github.com/gaurav171023/RAG-Based-AI-Teaching--Assistant.git
-cd RAG-Based-AI-Teaching--Assistant/RAG-assistance
+git clone https://github.com/Aasthiik/RAG-based-AI-teaching-assistant.git
+cd RAG-based-AI-teaching-assistant/RAG-assistance
 ```
 
 ### Create venv
@@ -158,7 +158,7 @@ python preprocess_json.py
 
 ### Run the app
 
-cd C:\RAG\RAG-Project\RAG-assistance
+cd RAG-assistance
 
 
 ```bash
@@ -274,7 +274,7 @@ I built a video teaching assistant that lets users ask natural-language question
 
 ## Author
 
-Gaurav A. ([gaurav171023](https://github.com/gaurav171023))
+Aasthiik ([Aasthiik](https://github.com/Aasthiik))
 
 ## License
 
